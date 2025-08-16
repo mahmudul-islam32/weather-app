@@ -9,6 +9,8 @@ export default defineConfig({
       plugins: [],
     },
   })],
+  // Set the base path for GitHub Pages deployment
+  base: process.env.NODE_ENV === 'production' ? '/weather-app/' : '/',
   server: {
     host: '0.0.0.0',
     port: 5173,
