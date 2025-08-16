@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <div className="weather-container">
         {!weatherData && !loading && (
-          <h1 className="app-title">Search in German cities</h1>
+          <h1 className="app-title">Search German cities</h1>
         )}
         
         <WeatherSearch
