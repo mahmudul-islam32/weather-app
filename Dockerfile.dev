@@ -1,0 +1,19 @@
+# Development Dockerfile with Hot Reloading
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files first for better caching
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Expose port for Vite dev server
+EXPOSE 5173
+
+# Start development server with hot reload
+CMD ["npm", "run", "dev"]
