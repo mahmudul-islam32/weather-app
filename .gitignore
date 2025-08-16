@@ -133,3 +133,7 @@ temp/
 *.backup
 *.bak
 *.tmp
+
+# Lighthouse CI
+.lighthouseci/
+lhci_reports/

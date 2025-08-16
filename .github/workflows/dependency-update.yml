@@ -1,0 +1,62 @@
+name: Dependency Updates
+
+on:
+  schedule:
+    # Run weekly on Mondays at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-dependencies:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install npm-check-updates
+      run: npm install -g npm-check-updates
+      
+    - name: Update dependencies
+      run: |
+        ncu -u
+        npm install
+        
+    - name: Run tests
+      run: |
+        npm run lint
+        npx tsc --noEmit
+        npm run build
+        
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'chore: update dependencies'
+        title: 'chore: update dependencies'
+        body: |
+          ## Automated Dependency Update
+          
+          This PR updates the project dependencies to their latest versions.
+          
+          ### Changes
+          - Updated npm dependencies
+          - Tested build and linting
+          
+          ### Verification
+          - [x] TypeScript compilation successful
+          - [x] Linting passed
+          - [x] Build completed successfully
+          
+          Please review the changes and merge if everything looks good.
+        branch: chore/update-dependencies
+        delete-branch: true

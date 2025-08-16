@@ -2,6 +2,10 @@
 
 A modern, responsive weather application built with React, TypeScript, and Docker. Get accurate weather forecasts for any location in Germany using the free Open-Meteo API. The application features an intuitive interface with search functionality, detailed weather displays, and a calendar component for date-based weather viewing.
 
+[![CI/CD Pipeline](https://github.com/yourusername/weather/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/yourusername/weather/actions/workflows/ci-cd.yml)
+[![Security Scan](https://img.shields.io/github/workflow/status/yourusername/weather/CI%2FCD%20Pipeline?label=security%20scan&logo=github)](https://github.com/yourusername/weather/security)
+[![Docker Image](https://img.shields.io/badge/docker-available-blue?logo=docker)](https://github.com/yourusername/weather/pkgs/container/weather)
+
 ## Features
 
 - 🌤️ **Real-time Weather Data**: Current weather conditions with temperature, humidity, wind speed, and more
@@ -35,7 +39,16 @@ This application uses the free [Open-Meteo API](https://open-meteo.com/) which p
 
 ## Quick Start with Docker
 
-The easiest way to run the application is using Docker. Choose between development mode (with hot reload) or production mode.
+The easiest way to run the application is using Docker. You can either build locally or use pre-built images from GitHub Container Registry.
+
+### Using Pre-built Docker Images
+```bash
+# Pull and run the latest image from GitHub Container Registry
+docker pull ghcr.io/yourusername/weather:latest
+docker run -p 3000:80 ghcr.io/yourusername/weather:latest
+
+# The app will be available at http://localhost:3000
+```
 
 ### Development Mode (Recommended for local development)
 ```bash
@@ -112,8 +125,18 @@ npm run preview
 # Run ESLint to check code quality
 npm run lint
 
+# Fix ESLint issues automatically
+npm run lint:fix
+
 # Run TypeScript compiler check
 npm run type-check
+
+# Docker commands
+npm run build:docker        # Build production Docker image
+npm run build:docker-dev    # Build development Docker image
+npm run docker:up          # Start with docker-compose
+npm run docker:down        # Stop docker-compose
+npm run docker:prod        # Start production mode with docker-compose
 ```
 
 ### Production Build
@@ -275,6 +298,22 @@ We welcome contributions! Please follow these steps:
 - Maintain responsive design principles
 - Test on both Docker and local environments
 - Update documentation for new features
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions for automated testing, building, and deployment:
+
+- **🔄 Continuous Integration**: Automated testing, linting, and building on every push
+- **🐳 Docker Images**: Automatic building and publishing to GitHub Container Registry
+- **🔒 Security Scanning**: Dependency vulnerability scanning with npm audit and Trivy
+- **⚡ Performance Testing**: Lighthouse CI for performance monitoring
+- **📦 Automated Releases**: Tagged releases with GitHub Releases and Docker images
+- **🌐 GitHub Pages**: Automatic deployment to GitHub Pages on main branch
+
+### Workflow Status
+Check the [Actions tab](../../actions) for current build status and deployment information.
+
+For detailed CI/CD documentation, see [CICD.md](CICD.md).
 
 ## License
 
