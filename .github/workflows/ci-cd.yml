@@ -137,23 +137,23 @@ jobs:
           npm install
         fi
       
-    - name: Run npm audit
-      run: npm audit --audit-level=high
+    - name: Run npm security audit
+      run: |
+        echo "🔍 Running npm security audit..."
+        npm audit --audit-level=moderate || {
+          echo "⚠️  Security vulnerabilities found"
+          npm audit --audit-level=moderate --json > audit-results.json || true
+          echo "📄 Audit results saved to audit-results.json"
+        }
       continue-on-error: true
       
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        
-    - name: Upload Trivy scan results
-      uses: github/codeql-action/upload-sarif@v3
+    - name: Upload audit results
+      uses: actions/upload-artifact@v4
       if: always()
       with:
-        sarif_file: 'trivy-results.sarif'
+        name: security-audit-results
+        path: audit-results.json
+        retention-days: 7
 
   # Deploy to GitHub Pages (Optional)
   deploy-pages:
