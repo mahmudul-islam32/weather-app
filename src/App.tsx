@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import WeatherSearch from './components/WeatherSearch';
 import WeatherDisplay from './components/WeatherDisplay';
 import { WeatherData } from './types/weather';
 import './App.css';
 
 function App() {
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [weatherData, setWeatherData] = React.useState<WeatherData | null>(null);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
 
   const handleWeatherData = (data: WeatherData) => {
     setWeatherData(data);

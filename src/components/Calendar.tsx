@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface CalendarProps {
   selectedDate: string;
@@ -6,8 +6,8 @@ interface CalendarProps {
   availableDates: string[];
 }
 
-const Calendar: React.FC<CalendarProps> = ({ selectedDate, onDateSelect, availableDates }) => {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+const Calendar = ({ selectedDate, onDateSelect, availableDates }: CalendarProps) => {
+  const [currentMonth, setCurrentMonth] = React.useState(new Date());
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();

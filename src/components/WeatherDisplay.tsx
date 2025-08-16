@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faDroplet, 
@@ -21,8 +21,8 @@ import Calendar from './Calendar';
 
 const WeatherDisplay = ({ weatherData }: any) => {
   const { location, current, daily } = weatherData;
-  const [selectedDayIndex, setSelectedDayIndex] = useState(0);
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [selectedDayIndex, setSelectedDayIndex] = React.useState(0);
+  const [showCalendar, setShowCalendar] = React.useState(false);
   
   const currentWeather = WeatherCodes[current.weatherCode] || {
     description: 'Unknown',

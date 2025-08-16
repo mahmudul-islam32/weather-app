@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { searchLocations, getWeatherData } from '../services/weatherService';
@@ -10,18 +10,18 @@ interface WeatherSearchProps {
   onError: (error: string) => void;
 }
 
-const WeatherSearch: React.FC<WeatherSearchProps> = ({
+const WeatherSearch = ({
   onWeatherData,
   onLoading,
   onError,
-}) => {
-  const [query, setQuery] = useState('');
-  const [suggestions, setSuggestions] = useState<LocationResult[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-  const [shouldSearch, setShouldSearch] = useState(true);
+}: WeatherSearchProps) => {
+  const [query, setQuery] = React.useState('');
+  const [suggestions, setSuggestions] = React.useState<LocationResult[]>([]);
+  const [showSuggestions, setShowSuggestions] = React.useState(false);
+  const [isSearching, setIsSearching] = React.useState(false);
+  const [shouldSearch, setShouldSearch] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const searchTimer = setTimeout(async () => {
       if (query.length >= 2 && shouldSearch) {
         setIsSearching(true);
