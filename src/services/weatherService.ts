@@ -17,7 +17,7 @@ export const searchLocations = async (query: string): Promise<LocationResult[]> 
 
     return response.data.results || [];
   } catch (error) {
-    console.error('Error searching locations:', error);
+    // Error searching locations
     throw new Error('Failed to search locations');
   }
 };
@@ -94,7 +94,7 @@ export const getWeatherData = async (
       },
     };
   } catch (error) {
-    console.error('Error fetching weather data:', error);
+    // Error fetching weather data
     throw new Error('Failed to fetch weather data');
   }
 };

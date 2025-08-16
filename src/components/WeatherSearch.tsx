@@ -33,7 +33,7 @@ const WeatherSearch = ({
           setSuggestions(germanLocations);
           setShowSuggestions(true); 
         } catch (error) {
-          console.error('Error searching locations:', error);
+          // Error searching locations
           setSuggestions([]);
           setShowSuggestions(true); 
         } finally {
